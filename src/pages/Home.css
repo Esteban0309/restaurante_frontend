@@ -1,0 +1,38 @@
+.hero-container {
+    position: relative;
+    background-image: url('../../public/logos/itchimbia_slider_vista_hermosa_ecuador-1.jpg'); /* Ajusta tu imagen */
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    width: 100%;
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Superposición oscura */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .text-highlight {
+    color: #d71f4b; /* Color rojo similar al de la imagen */
+    font-family: 'Pacifico', cursive; /* O alguna fuente decorativa */
+    font-size: 2rem;
+  }
+  
+  .btn-primary {
+    background-color: #d71f4b !important;
+    border-color: #d71f4b !important;
+  }
+  
+  .btn-primary:hover {
+    background-color: #b71c3f !important;
+    border-color: #b71c3f !important;
+  }
+  

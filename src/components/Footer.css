@@ -1,0 +1,22 @@
+.footer {
+    background-color: #111; /* Elegante, sobrio */
+    color: #eee;
+  }
+  
+  .footer-social a {
+    color: #fff;
+    font-size: 1.4rem;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+  }
+  
+  .footer-social a:hover {
+    color: #d71f4b; /* Mismo rojo elegante */
+  }
+  
+  .footer-logo h5 {
+    font-family: 'Pacifico', cursive; /* O fuente personalizada */
+    font-size: 1.8rem;
+    color: #d71f4b;
+  }
+  
