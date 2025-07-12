@@ -1,36 +1,68 @@
-export type Plato = {
+export interface Entradas {
+  id: number;
   nombre: string;
+  precio: number;
+  tipo: string;
   descripcion: string;
-  precio: string;
+  porciones: string | null;
+  disponibilidad: boolean;
+  profile: string | null;
+}
+
+export interface PlatosFuertes {
+  id: number;
+  nombre: string;
+  precio: number;
+  tipo: string;
+  descripcion: string;
+  porciones: string | null;
+  disponibilidad: boolean;
+  profile: string | null;
+}
+
+export interface Postres {
+  id: number;
+  nombre: string;
+  precio: number;
+  tipo: string;
+  descripcion: string;
+  porciones: string | null;
+  disponibilidad: boolean;
+  profile: string | null;
+}
+
+export interface Bebidas {
+  id: number;
+  nombre: string;
+  precio: number;
+  tipo: string;
+  descripcion: string;
+  porciones: string | null;
+  disponibilidad: boolean;
+  profile: string | null;
+}
+
+// Funciones para obtener los datos desde el backend
+export const fetchPlatosFuertes = async () => {
+  const response = await fetch('http://localhost:3000/platosfuertes');
+  const data = await response.json();
+  return data as PlatosFuertes[];
 };
 
-export const menuData: Record<string, { nombre: string; platos: Plato[] }> = {
-  entradas: {
-    nombre: 'Entradas',
-    platos: [
-      { nombre: 'Bruschetta', descripcion: 'Pan tostado con tomate y albahaca', precio: '$6' },
-      { nombre: 'Croquetas de jamón', descripcion: 'Crujientes y sabrosas', precio: '$7' }
-    ]
-  },
-  'platos-fuertes': {
-    nombre: 'Platos Fuertes',
-    platos: [
-      { nombre: 'Pizza Margarita', descripcion: 'Clásica con albahaca y mozzarella', precio: '$10' },
-      { nombre: 'Spaghetti Bolognese', descripcion: 'Salsa casera con carne molida', precio: '$12' }
-    ]
-  },
-  bebidas: {
-    nombre: 'Bebidas',
-    platos: [
-      { nombre: 'Limonada', descripcion: 'Refrescante y natural', precio: '$3' },
-      { nombre: 'Vino Tinto', descripcion: 'Copa de vino seleccionado', precio: '$5' }
-    ]
-  },
-  postres: {
-    nombre: 'Postres',
-    platos: [
-      { nombre: 'Tiramisú', descripcion: 'Clásico italiano con café', precio: '$6' },
-      { nombre: 'Helado Artesanal', descripcion: 'Sabores variados', precio: '$5' }
-    ]
-  }
+export const fetchEntradas = async () => {
+  const response = await fetch('http://localhost:3000/entradas');
+  const data = await response.json();
+  return data as Entradas[];
+};
+
+export const fetchBebidas = async () => {
+  const response = await fetch('http://localhost:3000/bebidas');
+  const data = await response.json();
+  return data as Bebidas[];
+};
+
+export const fetchPostres = async () => {
+  const response = await fetch('http://localhost:3000/postres');
+  const data = await response.json();
+  return data as Postres[];
 };
