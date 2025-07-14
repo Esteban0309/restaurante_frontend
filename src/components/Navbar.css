@@ -2,7 +2,7 @@
     background-color: transparent;
     padding: 1rem 0;
     transition: all 0.3s ease;
-    border: 2px solid black;
+    /* border: 2px solid black; */
   }
   
   .navbar-logo {
@@ -31,4 +31,33 @@
   .navbar-icons a:hover {
     color: #d71f4b;
   }
+
+  .admin-navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #222;
+  color: white;
+  padding: 0.3rem 1rem;
+  z-index: 2000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 35px;
+}
+
+.admin-navbar .admin-links a,
+.admin-navbar .admin-links button {
+  color: #00ffff;
+  margin-right: 1rem;
+  text-decoration: none;
+  background: none;
+  border: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
   
+
+.navbar-transparent.with-admin-bar {
+  top: 35px;
+}

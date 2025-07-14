@@ -1,0 +1,95 @@
+.loginpage-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  padding: 2rem;
+  background: #fff;
+}
+
+.loginpage-box {
+  width: 320px;
+  padding: 2rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 3px 7px rgba(0,0,0,0.1);
+  background-color: #fff;
+}
+
+.loginpage-title {
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+  color: #222;
+}
+
+.loginpage-input {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.loginpage-input:focus {
+  outline: none;
+  border-color: #7a1538;
+  box-shadow: 0 0 5px rgba(122,21,56,0.5);
+}
+
+.loginpage-remember {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.loginpage-remember input[type="checkbox"] {
+  margin-right: 0.5rem;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.loginpage-button {
+  width: 100%;
+  padding: 0.6rem 0;
+  background-color: #7a1538;
+  border: none;
+  border-radius: 25px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.loginpage-button:hover {
+  background-color: #590f2b;
+}
+
+.password-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.password-wrapper input.loginpage-input {
+  padding-right: 2.5rem; /* espacio para el botón */
+}
+
+.toggle-password-btn {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 1.2rem;
+  user-select: none;
+  color: #7a1538;
+  padding: 0;
+}

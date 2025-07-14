@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
       <div className="container text-center">
         <div className="footer-logo mb-3">
           {/* Puedes usar tu logo aquí si quieres */}
-          <h5 className="mb-0">Vista Hermosa</h5>
+          <h5 className="mb-0">Coval Restaurant</h5>
         </div>
 
         <div className="footer-social mb-3">
@@ -18,7 +18,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="footer-text">
-          <p>&copy; 2025 Vista Hermosa. Todos los derechos reservados.</p>
+          <p>&copy; 2025 CovalRestaurant. Todos los derechos reservados.</p>
         </div>
       </div>
     </footer>
