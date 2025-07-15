@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { getToken } from '../services/auth';
 import type { Entrada } from '../type/index';
-import './Admin.css';
+import './admin.css';
 
 interface BebidasResponse {
     success: boolean;
