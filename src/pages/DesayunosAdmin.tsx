@@ -4,7 +4,7 @@ import { getToken } from '../services/auth';
 import type { Entrada } from '../type/index';
 import './admin.css';
 
-interface PlatosFuertesResponse {
+interface DesayunossResponse {
     success: boolean;
     message: string;
     data: {
@@ -13,61 +13,64 @@ interface PlatosFuertesResponse {
     };
 }
 
-interface CrearPlatoFuerteResponse {
+interface CrearDesayunosResponse {
     success: boolean;
     data: Entrada;
     message?: string;
 }
 
-const tiposEntrada = [
-    'general',
-    'extras'
+const tiposDesayunos = [
+    'sopas',
+    'ceviches',
+    'mariscos',
+    'empanadas'
 ];
 
-export default function PlatosFuertesAdmin() {
-    const [PlatosFuertes, setPlatosFuertes] = useState<Entrada[]>([]);
-    const [editingPlatoFuerte, setEditingPlatoFuerte] = useState<Entrada | null>(null);
+
+export default function DesayunossAdmin() {
+    const [desayunos, setDesayunoss] = useState<Entrada[]>([]);
+    const [editingDesayunos, setEditingDesayunos] = useState<Entrada | null>(null);
     const [modalOpen, setModalOpen] = useState(false);
-    const [creatingPlatoFuerte, setCreatingPlatoFuerte] = useState<Entrada | null>(null);
+    const [creatingDesayunos, setCreatingDesayunos] = useState<Entrada | null>(null);
     const [isEditing, setIsEditing] = useState(false);
     const [isCreating, setIsCreating] = useState(false);
 
 
     useEffect(() => {
-        axios.get<PlatosFuertesResponse>('https://restaurante-api.desarrollo-software.xyz/platosfuertes', {
+        axios.get<DesayunossResponse>('https://restaurante-api.desarrollo-software.xyz/desayunos', {
             headers: {
                 Authorization: `Bearer ${getToken()}`,
             },
         }).then(res => {
-            setPlatosFuertes(res.data.data.items);
+            setDesayunoss(res.data.data.items);
         });
     }, []);
 
     const handleDelete = async (id: number) => {
-        const confirm = window.confirm('¿Estás seguro de que deseas eliminar esta PlatoFuerte?');
+        const confirm = window.confirm('¿Estás seguro de que deseas eliminar esta desayunos?');
         if (!confirm) return;
 
         try {
-            await axios.delete(`https://restaurante-api.desarrollo-software.xyz/platosfuertes/${id}`, {
+            await axios.delete(`https://restaurante-api.desarrollo-software.xyz/desayunos/${id}`, {
                 headers: { Authorization: `Bearer ${getToken()}` },
             });
-            setPlatosFuertes(prev => prev.filter(e => e.id !== id));
+            setDesayunoss(prev => prev.filter(e => e.id !== id));
         } catch (error) {
-            alert('Error al eliminar la PlatoFuerte');
+            alert('Error al eliminar la desayunos');
         }
     };
 
-    // Abrir modal con la PlatoFuerte a editar
-    const handleEdit = (PlatoFuerte: Entrada) => {
-        setEditingPlatoFuerte(PlatoFuerte);
-        setCreatingPlatoFuerte(null);
+    // Abrir modal con la desayunos a editar
+    const handleEdit = (desayunos: Entrada) => {
+        setEditingDesayunos(desayunos);
+        setCreatingDesayunos(null);
         setIsEditing(true);
         setModalOpen(true);
     };
 
-    // Abrir modal para crear una nueva PlatoFuerte
+    // Abrir modal para crear una nueva desayunos
     const handleCreate = () => {
-        setCreatingPlatoFuerte({
+        setCreatingDesayunos({
             id: 0, // o undefined si lo permite
             nombre: '',
             precio: 0,
@@ -90,90 +93,76 @@ export default function PlatosFuertesAdmin() {
         const checked = type === 'checkbox' ? (e.target as HTMLInputElement).checked : undefined;
         const val = type === 'checkbox' ? checked : value;
 
-        if (editingPlatoFuerte) {
-            setEditingPlatoFuerte(prev => ({ ...prev!, [name]: val }));
-        } else if (creatingPlatoFuerte) {
-            setCreatingPlatoFuerte(prev => ({ ...prev!, [name]: val }));
+        if (editingDesayunos) {
+            setEditingDesayunos(prev => ({ ...prev!, [name]: val }));
+        } else if (creatingDesayunos) {
+            setCreatingDesayunos(prev => ({ ...prev!, [name]: val }));
         }
     };
 
     // Guardar cambios (actualizar)
     const handleSave = async () => {
-        if (!editingPlatoFuerte) return;
+        if (!editingDesayunos) return;
 
         // Extraemos id y campos que no queremos mandar
-        const { id, porciones, profile, precio, ...rest } = editingPlatoFuerte;
+        const { id, porciones, profile, ...payload } = editingDesayunos;
 
-        // Construimos payload, asegurando que precio es un número
-        const payload = {
-            ...rest,
-            precio: Number(precio),
-        };
         try {
             await axios.put(
-                `https://restaurante-api.desarrollo-software.xyz/platosfuertes/${id}`,
+                `https://restaurante-api.desarrollo-software.xyz/desayunos/${id}`,
                 payload, // aquí MANDAMOS solo payload sin id, porciones ni profile
                 {
                     headers: { Authorization: `Bearer ${getToken()}` },
                 }
             );
 
-            setPlatosFuertes(prev =>
-                prev.map(e => (e.id === id ? editingPlatoFuerte : e))
+            setDesayunoss(prev =>
+                prev.map(e => (e.id === id ? editingDesayunos : e))
             );
             setModalOpen(false);
-            setEditingPlatoFuerte(null);
+            setEditingDesayunos(null);
         } catch (error) {
-            if (
-                typeof error === 'object' &&
-                error !== null &&
-                'response' in error &&
-                typeof (error as any).response === 'object'
-            ) {
-                const errResponse = (error as any).response;
-                console.error('Error al actualizar PlatoFuerte:', errResponse.data);
-
-                alert(
-                    'Error al actualizar PlatoFuerte:\n' +
-                    JSON.stringify(errResponse.data?.message ?? errResponse.data, null, 2)
-                );
-            } else {
-                console.error('Error inesperado:', error);
-                alert('Error inesperado al actualizar PlatoFuerte.');
-            }
+            alert('Error al actualizar la desayunos');
         }
     };
 
-    // Guardar nueva PlatoFuerte (crear)
+    // Guardar nueva desayunos (crear)
     const handleSaveCreate = async () => {
-        if (!creatingPlatoFuerte) return;
+        if (!creatingDesayunos) return;
 
         // Construir el payload limpiamente
         const payload = {
-            nombre: creatingPlatoFuerte.nombre,
-            precio: Number(creatingPlatoFuerte.precio),
-            tipo: creatingPlatoFuerte.tipo,
-            descripcion: creatingPlatoFuerte.descripcion || '',
-            disponibilidad: creatingPlatoFuerte.disponibilidad ?? false,
+            nombre: creatingDesayunos.nombre,
+            precio: Number(creatingDesayunos.precio),
+            tipo: creatingDesayunos.tipo,
+            descripcion: creatingDesayunos.descripcion || '',
+            disponibilidad: creatingDesayunos.disponibilidad ?? false,
         };
 
         try {
-            const res = await axios.post<CrearPlatoFuerteResponse>(
-                'https://restaurante-api.desarrollo-software.xyz/platosfuertes',
+            const res = await axios.post<CrearDesayunosResponse>(
+                'https://restaurante-api.desarrollo-software.xyz/desayunos',
                 payload,
                 {
                     headers: { Authorization: `Bearer ${getToken()}` },
                 }
             );
 
-            // Añadir la nueva PlatoFuerte a la lista
-            setPlatosFuertes(prev => [...prev, res.data.data]);
+            // Añadir la nueva desayunos a la lista
+            setDesayunoss(prev => [...prev, res.data.data]);
             setModalOpen(false);
-            setCreatingPlatoFuerte(null);
+            setCreatingDesayunos(null);
         } catch (error) {
-            if (!creatingPlatoFuerte.nombre || creatingPlatoFuerte.precio <= 0) {
-                alert("Completa los campos requeridos.");
-                return;
+            if (error && typeof error === 'object' && 'response' in error) {
+                const err = error as any;
+                console.error('Error al crear desayunos:', err.response?.data);
+                alert(
+                    'Error al crear desayunos:\n' +
+                    JSON.stringify(err.response?.data?.message ?? err.response?.data, null, 2)
+                );
+            } else {
+                console.error(error);
+                alert('Error desconocido al crear desayunos');
             }
         }
     };
@@ -183,36 +172,36 @@ export default function PlatosFuertesAdmin() {
         <>
             <div className="header-imagen-container">
                 <img className="imagen-header" src="/logos/crud.jpg" alt="Encabezado menú" />
-                <h1 className="titulo-superpuesto">Platos Fuertes</h1>
+                <h1 className="titulo-superpuesto">Desayunoss</h1>
             </div>
 
             <div className="entradas-admin-container">
                 <button className="entradas-btn-crear" onClick={handleCreate}>
-                    + Nuevo PlatoFuerte
+                    + Nueva Desayunos
                 </button>
 
                 <div className="entradas-grid">
-                    {PlatosFuertes.map(PlatoFuerte => (
-                        <div key={PlatoFuerte.id} className="entrada-card">
-                            <h3>{PlatoFuerte.nombre}</h3>
+                    {desayunos.map(desayunos => (
+                        <div key={desayunos.id} className="entrada-card">
+                            <h3>{desayunos.nombre}</h3>
                             <p>
-                                <strong>Precio:</strong> {PlatoFuerte.precio ?? '-'}
+                                <strong>Precio:</strong> {desayunos.precio ?? '-'}
                             </p>
                             <p>
-                                <strong>Tipo:</strong> {PlatoFuerte.tipo}
+                                <strong>Tipo:</strong> {desayunos.tipo}
                             </p>
-                            <p>{PlatoFuerte.descripcion}</p>
+                            <p>{desayunos.descripcion}</p>
                             <p>
-                                <strong>Porciones:</strong> {PlatoFuerte.porciones ?? '-'}
+                                <strong>Porciones:</strong> {desayunos.porciones ?? '-'}
                             </p>
                             <p>
-                                <strong>Disponible:</strong> {PlatoFuerte.disponibilidad ? 'Sí' : 'No'}
+                                <strong>Disponible:</strong> {desayunos.disponibilidad ? 'Sí' : 'No'}
                             </p>
                             <div className="card-actions">
-                                <button className="edit-btn" onClick={() => handleEdit(PlatoFuerte)}>
+                                <button className="edit-btn" onClick={() => handleEdit(desayunos)}>
                                     Editar
                                 </button>
-                                <button className="delete-btn" onClick={() => handleDelete(PlatoFuerte.id)}>
+                                <button className="delete-btn" onClick={() => handleDelete(desayunos.id)}>
                                     Eliminar
                                 </button>
                             </div>
@@ -222,10 +211,10 @@ export default function PlatosFuertesAdmin() {
             </div>
 
             {/* Modal para editar o crear */}
-            {modalOpen && (editingPlatoFuerte || creatingPlatoFuerte) && (
+            {modalOpen && (editingDesayunos || creatingDesayunos) && (
                 <div className="modal-overlay">
                     <div className="modal-content">
-                        <h3>{isCreating ? 'Crear Plato Fuerte' : 'Editar Plato Fuerte'}</h3>
+                        <h3>{isCreating ? 'Crear Desayunos' : 'Editar Desayunos'}</h3>
 
                         <div className="modal-grid">
                             <div>
@@ -233,7 +222,7 @@ export default function PlatosFuertesAdmin() {
                                 <input
                                     type="text"
                                     name="nombre"
-                                    value={isCreating ? creatingPlatoFuerte?.nombre : editingPlatoFuerte?.nombre}
+                                    value={isCreating ? creatingDesayunos?.nombre : editingDesayunos?.nombre}
                                     onChange={handleInputChange}
                                 />
                             </div>
@@ -244,8 +233,8 @@ export default function PlatosFuertesAdmin() {
                                     type="number"
                                     name="precio"
                                     value={isEditing
-                                        ? editingPlatoFuerte?.precio ?? 0
-                                        : creatingPlatoFuerte?.precio ?? 0}
+                                        ? editingDesayunos?.precio ?? 0
+                                        : creatingDesayunos?.precio ?? 0}
                                     onChange={handleInputChange}
                                 />
                             </div>
@@ -254,18 +243,17 @@ export default function PlatosFuertesAdmin() {
                                 <label>Tipo:</label>
                                 <select
                                     name="tipo"
-                                    value={isEditing ? editingPlatoFuerte!.tipo : creatingPlatoFuerte!.tipo}
+                                    value={isEditing ? editingDesayunos!.tipo : creatingDesayunos!.tipo}
                                     onChange={handleInputChange}
                                 >
                                     <option value="">Seleccionar tipo</option>
-                                    {tiposEntrada.map(tipo => (
+                                    {tiposDesayunos.map(tipo => (
                                         <option key={tipo} value={tipo}>
                                             {tipo}
                                         </option>
                                     ))}
                                 </select>
                             </div>
-
                             <div>
                                 <label className="checkbox-label">
                                     <input
@@ -273,8 +261,8 @@ export default function PlatosFuertesAdmin() {
                                         name="disponibilidad"
                                         checked={
                                             isEditing
-                                                ? editingPlatoFuerte!.disponibilidad ?? false
-                                                : creatingPlatoFuerte!.disponibilidad ?? false
+                                                ? editingDesayunos!.disponibilidad ?? false
+                                                : creatingDesayunos!.disponibilidad ?? false
                                         }
                                         onChange={handleInputChange}
                                     />
@@ -286,7 +274,7 @@ export default function PlatosFuertesAdmin() {
                                 <label>Descripción:</label>
                                 <textarea
                                     name="descripcion"
-                                    value={isEditing ? editingPlatoFuerte!.descripcion ?? '' : creatingPlatoFuerte!.descripcion ?? ''}
+                                    value={isEditing ? editingDesayunos!.descripcion ?? '' : creatingDesayunos!.descripcion ?? ''}
                                     onChange={handleInputChange}
                                     rows={4}
                                 />
@@ -301,8 +289,8 @@ export default function PlatosFuertesAdmin() {
                             )}
                             <button onClick={() => {
                                 setModalOpen(false);
-                                setCreatingPlatoFuerte(null);
-                                setEditingPlatoFuerte(null);
+                                setCreatingDesayunos(null);
+                                setEditingDesayunos(null);
                                 setIsCreating(false);
                             }}>
                                 Cancelar

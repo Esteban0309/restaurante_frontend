@@ -11,6 +11,18 @@ interface CrearVinoResponse {
     message?: string;
 }
 
+const tiposEntrada = [
+    'tinto',
+    'blanco',
+    'rosado',
+    'dulce',
+    'espumoso',
+    'vegano',
+    'tinto frances',
+    'naturales',
+    'de mesa',
+];
+
 export default function VinosAdmin() {
     const [Vinos, setVinos] = useState<Vino[]>([]);
     const [editingVino, setEditingVino] = useState<Vino | null>(null);
@@ -113,7 +125,7 @@ export default function VinosAdmin() {
             setVinos(prev => prev.map(e => (e.id === id ? editingVino : e)));
             setModalOpen(false);
             setEditingVino(null);
-        } catch(error: any) {
+        } catch (error: any) {
             // axios guarda info del error en error.response
             if (error.response) {
                 // El servidor respondió con un status fuera del rango 2xx
@@ -187,21 +199,23 @@ export default function VinosAdmin() {
                 </button>
 
                 <div className="entradas-grid">
-                    {Array.isArray(Vinos) && Vinos.map(Vino => (
-                        <div key={Vino.id} className="entrada-card">
-                            <h3>{Vino.nombre}</h3>
-                            <p><strong>Precio Copa:</strong> {Vino.precioCopa ?? '-'}</p>
-                            <p><strong>Precio Botella:</strong> {Vino.precioBotella ?? '-'}</p>
-                            <p><strong>Tipo:</strong> {Vino.tipo}</p>
-                            <p>{Vino.descripcion}</p>
-                            <p><strong>Porciones:</strong> {Vino.porciones ?? '-'}</p>
-                            <p><strong>Disponible:</strong> {Vino.disponibilidad ? 'Sí' : 'No'}</p>
-                            <div className="card-actions">
-                                <button className="edit-btn" onClick={() => handleEdit(Vino)}>Editar</button>
-                                <button className="delete-btn" onClick={() => handleDelete(Vino.id)}>Eliminar</button>
+                    {Array.isArray(Vinos) && Vinos
+                        .filter(v => v && typeof v === 'object' && 'nombre' in v)
+                        .map(Vino => (
+                            <div key={Vino.id} className="entrada-card">
+                                <h3>{Vino.nombre}</h3>
+                                <p><strong>Precio Copa:</strong> {Vino.precioCopa ?? '-'}</p>
+                                <p><strong>Precio Botella:</strong> {Vino.precioBotella ?? '-'}</p>
+                                <p><strong>Tipo:</strong> {Vino.tipo}</p>
+                                <p>{Vino.descripcion}</p>
+                                <p><strong>Porciones:</strong> {Vino.porciones ?? '-'}</p>
+                                <p><strong>Disponible:</strong> {Vino.disponibilidad ? 'Sí' : 'No'}</p>
+                                <div className="card-actions">
+                                    <button className="edit-btn" onClick={() => handleEdit(Vino)}>Editar</button>
+                                    <button className="delete-btn" onClick={() => handleDelete(Vino.id)}>Eliminar</button>
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
                 </div>
             </div>
 
@@ -243,12 +257,18 @@ export default function VinosAdmin() {
 
                             <div>
                                 <label>Tipo:</label>
-                                <input
-                                    type="text"
+                                <select
                                     name="tipo"
                                     value={isEditing ? editingVino!.tipo : creatingVino!.tipo}
                                     onChange={handleInputChange}
-                                />
+                                >
+                                    <option value="">Seleccionar tipo</option>
+                                    {tiposEntrada.map(tipo => (
+                                        <option key={tipo} value={tipo}>
+                                            {tipo}
+                                        </option>
+                                    ))}
+                                </select>
                             </div>
 
                             <div>

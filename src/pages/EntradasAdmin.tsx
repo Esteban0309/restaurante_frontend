@@ -19,6 +19,14 @@ interface CrearEntradaResponse {
     message?: string;
 }
 
+const tiposEntrada = [
+    'sopas',
+    'ceviches',
+    'mariscos',
+    'empanadas'
+];
+
+
 export default function EntradasAdmin() {
     const [entradas, setEntradas] = useState<Entrada[]>([]);
     const [editingEntrada, setEditingEntrada] = useState<Entrada | null>(null);
@@ -224,21 +232,28 @@ export default function EntradasAdmin() {
                                 <input
                                     type="number"
                                     name="precio"
-                                    value={isEditing ? editingEntrada!.precio : creatingEntrada!.precio}
+                                    value={isEditing
+                                        ? editingEntrada?.precio ?? 0
+                                        : creatingEntrada?.precio ?? 0}
                                     onChange={handleInputChange}
                                 />
                             </div>
 
                             <div>
                                 <label>Tipo:</label>
-                                <input
-                                    type="text"
+                                <select
                                     name="tipo"
                                     value={isEditing ? editingEntrada!.tipo : creatingEntrada!.tipo}
                                     onChange={handleInputChange}
-                                />
+                                >
+                                    <option value="">Seleccionar tipo</option>
+                                    {tiposEntrada.map(tipo => (
+                                        <option key={tipo} value={tipo}>
+                                            {tipo}
+                                        </option>
+                                    ))}
+                                </select>
                             </div>
-
                             <div>
                                 <label className="checkbox-label">
                                     <input

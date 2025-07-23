@@ -3,7 +3,7 @@ import api from '../api/api';
 import type { Entrada } from '../type';
 import './Menu.css';
 
-type Categoria = 'entradas' | 'platosfuertes' | 'postres' | 'bebidas' | 'vinos';
+type Categoria = 'entradas' | 'platosfuertes' | 'postres' | 'bebidas' | 'vinos' | 'desayunos';
 
 const categorias: { key: Categoria; label: string }[] = [
   { key: 'entradas', label: 'ENTRADAS' },
@@ -11,6 +11,7 @@ const categorias: { key: Categoria; label: string }[] = [
   { key: 'postres', label: 'POSTRES' },
   { key: 'bebidas', label: 'BEBIDAS' },
   { key: 'vinos', label: 'VINOS' },
+  { key: 'desayunos', label: 'DESAYUNOS' },
 ];
 
 function Menu() {

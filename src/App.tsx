@@ -15,6 +15,7 @@ import { useAuth } from './hooks/useAuth';
 import PlatosFuertesAdmin from './pages/PlatosFuertesAdmin';
 import PostresAdmin from './pages/PostresAdmin';
 import BebidasAdmin from './pages/BebidasAdmin';
+import DesayunossAdmin from './pages/DesayunosAdmin';
 
 const App: React.FC = () => {
   const { isAuthenticated } = useAuth();
@@ -52,6 +53,10 @@ const App: React.FC = () => {
         <Route
           path="/admin/vinos"
           element={isAuthenticated ? <VinosAdmin /> : <Navigate to="/user" />}
+        />
+        <Route
+          path="/admin/desayunos"
+          element={isAuthenticated ? <DesayunossAdmin /> : <Navigate to="/user" />}
         />
 
         {/* Ruta por defecto */}

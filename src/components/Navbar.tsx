@@ -30,6 +30,7 @@ const CustomNavbar: React.FC = () => {
             <Link to="/admin/postres" className="admin-link">Postres</Link>
             <Link to="/admin/bebidas" className="admin-link">Bebidas</Link>
             <Link to="/admin/vinos" className="admin-link">Vinos</Link>
+            <Link to="/admin/desayunos" className="admin-link">Desayunos</Link>
             <button onClick={handleLogout} className="admin-logout-btn">Cerrar sesión</button>
           </Nav>
         </div>
