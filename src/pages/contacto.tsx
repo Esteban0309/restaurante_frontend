@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import './Nosotros.css'; // Asegúrate de tener los estilos que te pasé antes
-
+import './Nosotros.css'; 
 const Contacto: React.FC = () => {
     const [formData, setFormData] = useState({
         nombre: '',
@@ -38,14 +37,14 @@ const Contacto: React.FC = () => {
             return;
         }
 
-        // ✅ Validar número de teléfono de 10 dígitos
+        
         if (!/^\d{10}$/.test(telefono)) {
             setError('El número de teléfono debe tener exactamente 10 dígitos.');
             setSuccess(null);
             return;
         }
 
-        // Envío exitoso (aquí iría tu lógica para enviar al backend)
+        
         console.log('Formulario enviado:', formData);
 
         setSuccess('¡Mensaje enviado correctamente!');
@@ -61,7 +60,7 @@ const Contacto: React.FC = () => {
 
     return (
         <>
-            {/* Header */}
+            
             <div className="header-imagen-container">
                 <img
                     className="imagen-header"
@@ -72,19 +71,19 @@ const Contacto: React.FC = () => {
             </div>
 
             <div className="contacto-container">
-                {/* Información */}
+                
                 <div className="contacto-info">
                     <h3><em>Mántente en</em> contacto</h3>
                     <div className="direccion">
-                        <p><strong>CENTRO HISTÓRICO</strong><br />
-                            Mejía Oe4-45 y García Moreno<br />
-                            Telf.: (+593 2) 295 1401 / (+593 2) 295 6132<br />
-                            Celular: 099 845 0888
+                        <p><strong>SAN ISIDRO DEL INCA</strong><br />
+                            JOSE FELIX BARRERIRO E12-83 Y DE LOS ALAMOS <br />
+                            Telf.: (+593 2) 281 0191 / (+593 2) 295 6132<br />
+                            Celular: 098 622 1982
                         </p>
-                        <p><strong>ITCHIMBÍA</strong><br />
-                            Manuel Samaniego N8-169 y Anteparra<br />
-                            Telf.: (+593 2) 316 1450 / (+593 2) 295 5892<br />
-                            Celular: 098 386 3791
+                        <p><strong>NAYON</strong><br />
+                            CALLE QUITO Y GARCIA MORENO<br />
+                            Telf.: (+593 2) 202 2410 / (+593 2) 666 6666<br />
+                            Celular: 099 252 9250
                         </p>
                     </div>
                     <div className="horarios">
@@ -103,7 +102,7 @@ const Contacto: React.FC = () => {
                     </div>
                 </div>
 
-                {/* Formulario */}
+                
                 <div className="contacto-formulario">
                     <h3><em>Déjanos</em> un mensaje</h3>
                     <p>¿Tienes algo en mente para decirnos? No dudes en ponerte en contacto con nosotros a través de nuestro formulario de contacto.</p>
@@ -142,8 +141,8 @@ const Contacto: React.FC = () => {
                             required
                         >
                             <option value="" disabled>Seleccione el local a visitar</option>
-                            <option value="centro">Centro Histórico</option>
-                            <option value="itchimbia">Itchimbía</option>
+                            <option value="NORTE">San isidro del Inca</option>
+                            <option value="NORTE">Nayón</option>
                         </select>
                         <textarea
                             name="mensaje"

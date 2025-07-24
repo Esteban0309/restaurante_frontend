@@ -41,7 +41,7 @@ const Nosotros: React.FC = () => {
         </div>
       </div>
 
-      {/* Imagen de separación decorativa */}
+      
       <div className="separador">
         <img
           src="https://vistahermosa.ec/wp-content/uploads/2018/04/cocteles1.jpg"
@@ -49,7 +49,7 @@ const Nosotros: React.FC = () => {
         />
       </div>
 
-      {/* NUEVA SECCIÓN: Beneficios */}
+      
       <section className="beneficios-nosotros">
         <div className="beneficio">
           <h2><span className="resaltado">Música</span><br />en vivo</h2>

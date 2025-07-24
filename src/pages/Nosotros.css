@@ -13,9 +13,10 @@
 }
 
 .titulo-superpuesto {
-  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   top: 50%;
-  left: 50%;
   transform: translate(-50%, -50%);
   color: white;
   font-size: 3rem;
@@ -89,7 +90,7 @@
   text-align: justify;
 }
 
-/* Responsive para móviles */
+
 @media (max-width: 768px) {
   .contenedor-mv {
     flex-direction: column;
@@ -146,7 +147,6 @@
   line-height: 1.5;
 }
 
-/* Contenedor general */
 .contacto-container {
   display: flex;
   flex-wrap: wrap;
@@ -156,7 +156,7 @@
   font-family: 'Helvetica Neue', sans-serif;
 }
 
-/* Columna de información */
+
 .contacto-info {
   flex: 1;
   min-width: 300px;
@@ -196,7 +196,7 @@
   color: #aa0535;
 }
 
-/* Columna del formulario */
+
 .contacto-formulario {
   flex: 1;
   min-width: 300px;
@@ -223,7 +223,7 @@
   color: #444;
 }
 
-/* Estilos de inputs y formulario */
+
 .contacto-formulario form {
   display: flex;
   flex-wrap: wrap;
@@ -262,7 +262,7 @@
   background-color: #8a042b;
 }
 
-/* Mensajes de error y éxito */
+
 .mensaje-error {
   background-color: #fce4e4;
   border: 1px solid #e53935;
@@ -283,7 +283,7 @@
   font-size: 14px;
 }
 
-/* Imagen de encabezado */
+
 .header-imagen-container {
   position: relative;
   width: 100%;
@@ -297,17 +297,9 @@
   object-fit: cover;
 }
 
-.titulo-superpuesto {
-  position: absolute;
-  bottom: 20px;
-  left: 40px;
-  font-size: 48px;
-  font-weight: bold;
-  color: white;
-  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
-}
 
-/* Responsive */
+
+
 @media (max-width: 768px) {
   .contacto-container {
     flex-direction: column;
