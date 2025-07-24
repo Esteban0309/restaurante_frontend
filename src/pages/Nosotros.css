@@ -146,3 +146,182 @@
   line-height: 1.5;
 }
 
+/* Contenedor general */
+.contacto-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 50px 10%;
+  background-color: #fefefe;
+  font-family: 'Helvetica Neue', sans-serif;
+}
+
+/* Columna de información */
+.contacto-info {
+  flex: 1;
+  min-width: 300px;
+  max-width: 45%;
+  padding: 20px;
+  color: #333;
+}
+
+.contacto-info h3 {
+  font-size: 32px;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+.contacto-info h3 em {
+  color: #aa0535;
+  font-style: italic;
+  font-weight: 600;
+}
+
+.direccion p,
+.horarios p {
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+
+/* Redes sociales */
+.redes-sociales a {
+  margin-right: 15px;
+  font-size: 18px;
+  color: #000;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.redes-sociales a:hover {
+  color: #aa0535;
+}
+
+/* Columna del formulario */
+.contacto-formulario {
+  flex: 1;
+  min-width: 300px;
+  max-width: 45%;
+  padding: 20px;
+  color: #333;
+}
+
+.contacto-formulario h3 {
+  font-size: 32px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.contacto-formulario h3 em {
+  color: #aa0535;
+  font-style: italic;
+  font-weight: 600;
+}
+
+.contacto-formulario p {
+  font-size: 14px;
+  margin-bottom: 20px;
+  color: #444;
+}
+
+/* Estilos de inputs y formulario */
+.contacto-formulario form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.contacto-formulario input,
+.contacto-formulario select,
+.contacto-formulario textarea {
+  width: 100%;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.contacto-formulario textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.contacto-formulario button {
+  width: 100%;
+  padding: 12px;
+  background-color: #aa0535;
+  color: white;
+  border: none;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.contacto-formulario button:hover {
+  background-color: #8a042b;
+}
+
+/* Mensajes de error y éxito */
+.mensaje-error {
+  background-color: #fce4e4;
+  border: 1px solid #e53935;
+  color: #b71c1c;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.mensaje-exito {
+  background-color: #e8f5e9;
+  border: 1px solid #43a047;
+  color: #2e7d32;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+/* Imagen de encabezado */
+.header-imagen-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+}
+
+.imagen-header {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.titulo-superpuesto {
+  position: absolute;
+  bottom: 20px;
+  left: 40px;
+  font-size: 48px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contacto-container {
+    flex-direction: column;
+    padding: 30px 5%;
+  }
+
+  .contacto-info,
+  .contacto-formulario {
+    max-width: 100%;
+  }
+
+  .titulo-superpuesto {
+    font-size: 36px;
+    left: 20px;
+  }
+}
+
